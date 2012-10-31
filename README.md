@@ -1,6 +1,6 @@
 # You stay classy, JavaScript
 
-Ron.js is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces, all with a clean, simple syntax.
+Ron.js is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces.
 
 ## Usage
 
