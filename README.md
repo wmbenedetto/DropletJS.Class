@@ -68,7 +68,8 @@ var Actor = Ron.extend(Person,{
     movies                  : [],
 
     /**
-     * Subclass method extends parent class method
+     * Subclass method overrides parent class method, but parent
+     * class method is still accessible via this._parent.construct()
      *
      * @param data Data object
      */
@@ -86,9 +87,52 @@ var Actor = Ron.extend(Person,{
      * Subclass method completely overrides parent class method
      */
     work : function(){
-        console.log('Actor.work(): To be or not to be? That is the question.');
+        console.log(this.firstName+' '+this.lastName+" says \"To be or not to be? That is the question.\"");
+    },
+
+    /**
+     * New method extends parent class functionality
+     */
+    brag : function(){
+
+        for (var i=0;i<this.movies.length;i++){
+            console.log('I was in "'+this.movies[i]+'"')
+        }
     }
 });
+```
+
+### Instantiating classes
+
+Once a class has been created, instances can be created via the `new` keyword.
+
+```javascript
+/* Instantiate a new Person */
+var person = new Person({
+    firstName : 'Warren',
+    lastName : 'Benedetto'
+});
+
+/* Instantiate a new Actor */
+var actor = new Actor({
+    firstName : 'Brad',
+    lastName : 'Pitt',
+    movies : [
+        'Seven',
+        'Troy',
+        'Moneyball'
+    ]
+});
+
+person.work();  // Warren Benedetto says "Every day I'm hustlin'" 
+actor.work();   // Brad Pitt says "To be or not to be? That is the question." 
+
+actor.brag();
+/*
+I was in "Seven" 
+I was in "Troy" 
+I was in "Moneyball" 
+*/
 ```
 
 ## Questions? Bugs? Suggestions?
