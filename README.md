@@ -6,9 +6,9 @@ Ron.js is a simple implementation of classical inheritance for JavaScript. It al
 
 ### Creating a class
 
-To create a new class, you simply call Ron.create() and pass it an object literal containing the class properties and methods.
+To create a new class, simply call Ron.create() and pass it an object literal containing the class properties and methods.
 
-If you include a `construct` method, it will automatically be called when the class is instantiated.
+If you include an optional `construct` method, it will automatically be called when the class is instantiated.
 
 ```javascript
 /**
@@ -47,7 +47,7 @@ var Person = Ron.create({
 
 ### Extending a class
 
-To extend a class, you call Ron.extend() and pass it a reference to the class you want to extend, as well as an object literal containing any methods or properties with which you want to extend it.
+To extend a class, call Ron.extend() and pass it a reference to the class you want to extend, as well as an object literal containing any methods or properties with which you want to extend it.
 
 As with any classical inheritance, the child class can override the parent class' properties and methods. Any properties and methods that aren't overridden are inherited.
 
@@ -133,6 +133,124 @@ I was in "Seven"
 I was in "Troy" 
 I was in "Moneyball" 
 */
+```
+
+### Defining interfaces
+
+Ron.js enforces interfaces' contracts in two ways: It checks that the property or method exists, and that it matches the type defined in the interface definition. 
+
+It does not check the number or type of method arguments. This isn't Java, people.
+
+Valid types are:
+* `Ron.BOOLEAN`
+* `Ron.FUNCTION`
+* `Ron.NUMBER`
+* `Ron.OBJECT`
+* `Ron.STRING`
+
+Interfaces are defined as object literals containing the properties or methods you require the class to implement, mapped to their required types.
+
+```javascript
+var VillainInterface = {
+    doEvil : Ron.FUNCTION
+}
+```
+
+### Implementing interfaces
+
+Interfaces are implemented by chaining the `implement` method with the `Ron.create` or `Ron.extend` method.
+
+To properly implement an interface, the class must contain the property or method AND it must be the correct type.
+
+```javascript
+var Villain = Ron.extend(Actor,{
+
+    doEvil : function(){
+        console.log("See, I'm a man of simple tastes. I enjoy dynamite, and gunpowder, and... gasoline!");
+    },
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    }
+
+}).implement(VillainInterface);
+```
+
+### Interface errors
+
+In the example below, the Villain class implements VillainInterface. This interface requires the Villain to contain a `doEvil` method. It doesn't. 
+
+```javascript
+var Villain = Ron.extend(Actor,{
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    }
+
+}).implement(VillainInterface);
+```
+
+Therefore, this class would throw an Error:
+
+```
+Uncaught Error: Interface not fully implemented: "doEvil" function is missing 
+```
+
+What if `doEvil` was defined, but it was defined as a boolean instead of a function?
+
+```javascript
+var Villain = Ron.extend(Actor,{
+
+    doEvil : false,
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    }
+
+}).implement(VillainInterface);
+```
+
+This also violates the interface's contract, so it too would throw an Error:
+
+```
+Uncaught Error: Interface improperly implemented. "doEvil" must be a function.
+```
+
+### Multiple interfaces
+
+Classes can implement multiple interfaces. Just pass each interface as an argument to `implement`.
+
+```javascript
+
+var VillainInterface = {
+    doEvil : Ron.FUNCTION
+}
+
+var JokerInterface = {
+    laugh : Ron.FUNCTION
+}
+
+var HeathLedgerInterface = {
+    isDead : Ron.BOOLEAN
+}
+
+var Villain = Ron.extend(Actor,{
+
+    isDead : true,
+
+    doEvil : function(){
+        console.log("See, I'm a man of simple tastes. I enjoy dynamite, and gunpowder, and... gasoline!");
+    },
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    },
+
+    laugh : function(){
+        console.log('Ha ha ha!');
+    }
+
+}).implement(VillainInterface,JokerInterface,HeathLedgerInterface);
 ```
 
 ## Questions? Bugs? Suggestions?
