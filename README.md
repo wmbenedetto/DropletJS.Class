@@ -1,8 +1,95 @@
-# Ron.js : "You stay classy, JavaScript"
+# You stay classy, JavaScript
 
-Ron.js is a simple implementation of classical inheritance for JavaScript.
+Ron.js is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces, all with a clean, simple syntax.
 
-It allows you to extend classes and implement simple interfaces, all with a clean, simple syntax.
+## Usage
+
+### Creating a class
+
+To create a new class, you simply call Ron.create() and pass it an object literal containing the class properties and methods.
+
+If you include a `construct` method, it will automatically be called when the class is instantiated.
+
+```javascript
+/**
+ * Create a new Person class
+ */
+var Person = Ron.create({
+
+    /**
+     * Class properties
+     */
+    firstName               : '',
+    lastName                : '',
+
+    /**
+     * Constructor. Automatically called when class is instantiated.
+     *
+     * @param data Data object
+     */
+    construct : function(data){
+
+        console.log('This data was passed in to the Person constructor: ',data);
+
+        data                = data || {};
+        this.firstName      = data.firstName || '';
+        this.lastName       = data.lastName  || '';
+    },
+
+    /**
+     * Class method
+     */
+    work : function(){
+        console.log("Person.work(): Every day I'm hustlin'");
+    }
+});
+```
+
+### Extending a class
+
+To extend a class, you call Ron.extend() and pass it a reference to the class you want to extend, as well as an object literal containing any methods or properties with which you want to extend it.
+
+As with any classical inheritance, the child class can override the parent class' properties and methods. Any properties and methods that aren't overridden are inherited.
+
+Parent methods that have been overridden can be accessed from within the overriding method using `this._parent.methodName()`.
+
+In the example below, the `construct` method is overridden. However, the parent class' `construct` method can still be accessed by calling `this._parent.construct()` from within `construct`.
+
+```javascript
+/**
+ * Extend the Person class to create an Actor class
+ */
+var Actor = Ron.extend(Person,{
+
+    /**
+     * Subclass property. Class properties from Person
+     * are inherited.
+     */
+    movies                  : [],
+
+    /**
+     * Subclass method extends parent class method
+     *
+     * @param data Data object
+     */
+    construct : function(data){
+
+        console.log('This data was passed in to the Actor constructor: ',data);
+
+        /* Parent class methods that have been overridden can be called using this._parent.methodName() */
+        this._parent.construct(data);
+
+        this.movies         = data.movies || [];
+    },
+
+    /**
+     * Subclass method completely overrides parent class method
+     */
+    work : function(){
+        console.log('Actor.work(): To be or not to be? That is the question.');
+    }
+});
+```
 
 ## Questions? Bugs? Suggestions?
 
