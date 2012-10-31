@@ -137,7 +137,7 @@ I was in "Moneyball"
 
 ### Defining an interface
 
-Ron.js enforces interfaces' contracts in two ways: It checks that the property or method exists, and that it matches the type defined in the interface definition. 
+Ron.js enforces interfaces' contracts in two ways: It checks that the interface's properties or methods exist, and that they match the types defined in the interface object. 
 
 It does not check the number or type of method arguments. This isn't Java, people.
 
