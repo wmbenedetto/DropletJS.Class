@@ -1,4 +1,5 @@
-/*!
+/*! Ron.js | MIT License | https://github.com/wmbenedetto/ron.js#mit-license */
+/**
  *     ____  ____  _   __     _______
  *    / __ \/ __ \/ | / /    / / ___/
  *   / /_/ / / / /  |/ /__  / /\__ \
