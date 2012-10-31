@@ -29,7 +29,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-(function(window, undefined){
+(function(window,undefined){
 
     var Class = {
 
@@ -133,11 +133,11 @@
 
                         if (typeof ClassInstance.prototype[prop] === 'undefined'){
 
-                            throw new Error('Interface not fully implemented: "'+prop+'" '+typeof interfaces[i][prop]+' is missing');
+                            throw new Error('Interface not fully implemented: "'+prop+'" '+typeof interfaces[i][prop]+' is missing.');
 
                         } else if (typeof interfaces[i][prop] !== typeof ClassInstance.prototype[prop]){
 
-                            throw new Error('Interface improperly implemented. "'+prop+'" property must be a '+typeof interfaces[i][prop]);
+                            throw new Error('Interface improperly implemented. "'+prop+'" must be a '+typeof interfaces[i][prop]+'.');
                         }
                     }
                 }
@@ -148,6 +148,11 @@
     };
 
     var ClassFactory                    = function(){};
+    ClassFactory.BOOLEAN                = true;
+    ClassFactory.FUNCTION               = function(){};
+    ClassFactory.NUMBER                 = 1;
+    ClassFactory.OBJECT                 = {};
+    ClassFactory.STRING                 = '';
 
     /**
      * Creates new class based on definition object
@@ -158,8 +163,6 @@
     ClassFactory.create = function(definition){
 
         function ClassInstance(){
-
-            this.CLASS_ID               = ('' + Math.random() + new Date().getTime()).substr(10);
 
             Class.createInstanceObjects(this);
 
@@ -194,10 +197,9 @@
      */
     ClassFactory.extend = function(parent,definition){
 
-        var ClassInstance                       = ClassFactory.create(definition);
-
         function ParentInstance(){}
 
+        var ClassInstance                       = ClassFactory.create(definition);
         ParentInstance.prototype                = parent.prototype;
         ClassInstance.prototype                 = new ParentInstance();
         ClassInstance.prototype.constructor     = ClassInstance;

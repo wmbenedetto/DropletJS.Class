@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Ron.js</title>
+    <script language="JavaScript" type="text/javascript" src="../src/Ron.js"></script>
+
+    <script type="text/javascript">
+
+        /**
+         * Create a new Person class
+         */
+        var Person = Ron.create({
+
+            /**
+             * Class properties
+             */
+            firstName               : '',
+            lastName                : '',
+
+            /**
+             * Constructor. Automatically called when class is instantiated.
+             *
+             * @param data Data object
+             */
+            construct : function(data){
+
+                console.log('This data was passed in to the Person constructor: ',data);
+
+                data                = data || {};
+                this.firstName      = data.firstName || '';
+                this.lastName       = data.lastName  || '';
+            },
+
+            /**
+             * Class method
+             */
+            work : function(){
+                console.log(this.firstName+' '+this.lastName+" says \"Every day I'm hustlin'\"");
+            }
+
+        });
+
+        /**
+         * Extend the Person class to create an Actor class
+         */
+        var Actor = Ron.extend(Person,{
+
+            /**
+             * Subclass property. Class properties from Person
+             * are inherited.
+             */
+            movies                  : [],
+
+            /**
+             * Subclass method overrides parent class method, but parent
+             * class method is still accessible via this._parent.construct()
+             *
+             * @param data Data object
+             */
+            construct : function(data){
+
+                console.log('This data was passed in to the Actor constructor: ',data);
+
+                /* Parent class methods that have been overridden can be called using this._parent.methodName() */
+                this._parent.construct(data);
+
+                this.movies         = data.movies || [];
+            },
+
+            /**
+             * Subclass method completely overrides parent class method
+             */
+            work : function(){
+                console.log(this.firstName+' '+this.lastName+" says \"To be or not to be? That is the question.\"");
+            },
+
+            /**
+             * New method extends parent class functionality
+             */
+            brag : function(){
+
+                for (var i=0;i<this.movies.length;i++){
+                    console.log('I was in "'+this.movies[i]+'"')
+                }
+            }
+        });
+
+        /* Instantiate a new Person */
+        var person = new Person({
+            firstName : 'Warren',
+            lastName : 'Benedetto'
+        });
+
+        /* Instantiate a new Actor */
+        var actor = new Actor({
+            firstName : 'Brad',
+            lastName : 'Pitt',
+            movies : [
+                'Seven',
+                'Troy',
+                'Moneyball'
+            ]
+        });
+
+        console.log('Person:',person);
+        console.log('Actor:',actor);
+
+        person.work();
+        actor.work();
+        actor.brag();
+
+        var VillainInterface = {
+            doEvil  : Ron.FUNCTION
+        };
+
+        /**
+         * Error: Interface not fully implemented: "doEvil" function is missing.
+         */
+        var Villain = Ron.extend(Actor,{
+
+            work : function(){
+                console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+            }
+
+        }).implement(VillainInterface);
+
+        /**
+         * Error: Interface improperly implemented. "doEvil" must be a function.
+         */
+        var Villain2 = Ron.extend(Actor,{
+
+            doEvil : false,
+
+            work : function(){
+                console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+            }
+
+        }).implement(VillainInterface);
+
+        /**
+         * Interface properly implemented
+         */
+        var Villain3 = Ron.extend(Actor,{
+
+            doEvil : function(){
+                console.log("See, I'm a man of simple tastes. I enjoy dynamite, and gunpowder, and... gasoline!");
+            },
+
+            work : function(){
+                console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+            }
+
+        }).implement(VillainInterface);
+
+    </script>
+<body>
+<h1>Open your developer console (F12)</h1>
+</body>
+</html>
