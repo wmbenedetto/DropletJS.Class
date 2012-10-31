@@ -135,7 +135,7 @@ I was in "Moneyball"
 */
 ```
 
-### Defining interfaces
+### Defining an interface
 
 Ron.js enforces interfaces' contracts in two ways: It checks that the property or method exists, and that it matches the type defined in the interface definition. 
 
@@ -156,7 +156,7 @@ var VillainInterface = {
 }
 ```
 
-### Implementing interfaces
+### Implementing an interface
 
 Interfaces are implemented by chaining the `implement` method with the `Ron.create` or `Ron.extend` method.
 
@@ -176,49 +176,9 @@ var Villain = Ron.extend(Actor,{
 }).implement(VillainInterface);
 ```
 
-### Interface errors
+### Implementing multiple interfaces
 
-In the example below, the Villain class implements VillainInterface. This interface requires the Villain to contain a `doEvil` method. It doesn't. 
-
-```javascript
-var Villain = Ron.extend(Actor,{
-
-    work : function(){
-        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
-    }
-
-}).implement(VillainInterface);
-```
-
-Therefore, this class would throw an Error:
-
-```
-Uncaught Error: Interface not fully implemented: "doEvil" function is missing 
-```
-
-What if `doEvil` was defined, but it was defined as a boolean instead of a function?
-
-```javascript
-var Villain = Ron.extend(Actor,{
-
-    doEvil : false,
-
-    work : function(){
-        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
-    }
-
-}).implement(VillainInterface);
-```
-
-This also violates the interface's contract, so it too would throw an Error:
-
-```
-Uncaught Error: Interface improperly implemented. "doEvil" must be a function.
-```
-
-### Multiple interfaces
-
-Classes can implement multiple interfaces. Just pass each interface as an argument to `implement`.
+Classes can implement any number of interfaces. Just pass each interface as an argument to `implement`.
 
 ```javascript
 
@@ -251,6 +211,46 @@ var Villain = Ron.extend(Actor,{
     }
 
 }).implement(VillainInterface,JokerInterface,HeathLedgerInterface);
+```
+
+### Interface errors
+
+In the example below, the Villain class implements VillainInterface. This interface requires the Villain to contain a `doEvil` method. It doesn't. 
+
+```javascript
+var Villain = Ron.extend(Actor,{
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    }
+
+}).implement(VillainInterface);
+```
+
+Therefore, the class would throw an Error:
+
+```
+Uncaught Error: Interface not fully implemented: "doEvil" function is missing 
+```
+
+What if `doEvil` was defined, but it was defined as a boolean instead of a function?
+
+```javascript
+var Villain = Ron.extend(Actor,{
+
+    doEvil : false,
+
+    work : function(){
+        console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
+    }
+
+}).implement(VillainInterface);
+```
+
+That also violates the interface's contract, so it too would throw an Error:
+
+```
+Uncaught Error: Interface improperly implemented. "doEvil" must be a function.
 ```
 
 ## Questions? Bugs? Suggestions?
