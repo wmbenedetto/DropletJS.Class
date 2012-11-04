@@ -1,4 +1,7 @@
-/*! Ron.js | MIT License | https://github.com/wmbenedetto/ron.js#mit-license */
+/** @license Ron.js | MIT License | https://github.com/wmbenedetto/ron.js#mit-license */
+if (typeof MINIFIED === 'undefined'){
+    MINIFIED = false;
+}
 /**
  *     ____  ____  _   __     _______
  *    / __ \/ __ \/ | / /    / / ___/
