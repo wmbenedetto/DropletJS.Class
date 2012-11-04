@@ -1,5 +1,5 @@
 {
   "name": "ron.js",
-  "version": "release-0.1",
+  "version": "0.1.0",
   "main": "./src/Ron.min.js"
 }
