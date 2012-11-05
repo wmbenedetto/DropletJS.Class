@@ -224,6 +224,17 @@ if (typeof MINIFIED === 'undefined'){
         return ClassInstance;
     };
 
-    window.Ron = ClassFactory;
+    /* If RequireJS define() is present, use it to export ClassFactory */
+    if (typeof define === "function") {
+
+        define(function() {
+            return ClassFactory;
+        });
+    }
+    /* Otherwise, add ClassFactory to global namespace as Ron */
+    else {
+
+        window.Ron = ClassFactory;
+    }
 
 }(window));
