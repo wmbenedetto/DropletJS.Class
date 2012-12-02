@@ -1,5 +1,5 @@
 {
-  "name": "ron.js",
+  "name": "DropletJS.Class",
   "version": "0.2.1",
-  "main": "./src/Ron.min.js"
+  "main": "./src/DropletJS.Class.min.js"
 }

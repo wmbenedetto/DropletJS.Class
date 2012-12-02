@@ -1,12 +1,12 @@
 # You stay classy, JavaScript
 
-Ron.js is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces.
+DropletJS.Class is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces.
 
 ## Usage
 
 ### Creating a class
 
-To create a new class, simply call Ron.create() and pass it an object literal containing the class properties and methods.
+To create a new class, simply call DropletJS.Class.create() and pass it an object literal containing the class properties and methods.
 
 If you include an optional `construct` method, it will automatically be called when the class is instantiated.
 
@@ -14,7 +14,7 @@ If you include an optional `construct` method, it will automatically be called w
 /**
  * Create a new Person class
  */
-var Person = Ron.create({
+var Person = DropletJS.Class.create({
 
     /**
      * Class properties
@@ -47,7 +47,7 @@ var Person = Ron.create({
 
 ### Extending a class
 
-To extend a class, call Ron.extend() and pass it a reference to the class you want to extend, as well as an object literal containing any methods or properties with which you want to extend it.
+To extend a class, call DropletJS.Class.extend() and pass it a reference to the class you want to extend, as well as an object literal containing any methods or properties with which you want to extend it.
 
 As with any classical inheritance, the child class can override the parent class' properties and methods. Any properties and methods that aren't overridden are inherited.
 
@@ -59,7 +59,7 @@ In the example below, the `construct` method is overridden. However, the parent 
 /**
  * Extend the Person class to create an Actor class
  */
-var Actor = Ron.extend(Person,{
+var Actor = DropletJS.Class.extend(Person,{
 
     /**
      * Subclass property. Class properties from Person
@@ -137,33 +137,33 @@ I was in "Moneyball"
 
 ### Defining an interface
 
-Ron.js enforces interfaces' contracts in two ways: It checks that the interface's properties or methods exist, and that they match the types defined in the interface object. 
+DropletJS.Class.js enforces interfaces' contracts in two ways: It checks that the interface's properties or methods exist, and that they match the types defined in the interface object.
 
 It does not check the number or type of method arguments. This isn't Java, people.
 
 Valid types are:
-* `Ron.BOOLEAN`
-* `Ron.FUNCTION`
-* `Ron.NUMBER`
-* `Ron.OBJECT`
-* `Ron.STRING`
+* `DropletJS.Class.BOOLEAN`
+* `DropletJS.Class.FUNCTION`
+* `DropletJS.Class.NUMBER`
+* `DropletJS.Class.OBJECT`
+* `DropletJS.Class.STRING`
 
 Interfaces are defined as object literals containing the properties or methods you require the class to implement, mapped to their required types.
 
 ```javascript
 var VillainInterface = {
-    doEvil : Ron.FUNCTION
+    doEvil : DropletJS.Class.FUNCTION
 }
 ```
 
 ### Implementing an interface
 
-Interfaces are implemented by chaining the `implement` method with the `Ron.create` or `Ron.extend` method.
+Interfaces are implemented by chaining the `implement` method with the `DropletJS.Class.create` or `DropletJS.Class.extend` method.
 
 To properly implement an interface, the class must contain the property or method AND it must be the correct type.
 
 ```javascript
-var Villain = Ron.extend(Actor,{
+var Villain = DropletJS.Class.extend(Actor,{
 
     doEvil : function(){
         console.log("See, I'm a man of simple tastes. I enjoy dynamite, and gunpowder, and... gasoline!");
@@ -183,18 +183,18 @@ Classes can implement any number of interfaces. Just pass each interface as an a
 ```javascript
 
 var VillainInterface = {
-    doEvil : Ron.FUNCTION
+    doEvil : DropletJS.Class.FUNCTION
 }
 
 var JokerInterface = {
-    laugh : Ron.FUNCTION
+    laugh : DropletJS.Class.FUNCTION
 }
 
 var HeathLedgerInterface = {
-    isDead : Ron.BOOLEAN
+    isDead : DropletJS.Class.BOOLEAN
 }
 
-var Villain = Ron.extend(Actor,{
+var Villain = DropletJS.Class.extend(Actor,{
 
     isDead : true,
 
@@ -218,7 +218,7 @@ var Villain = Ron.extend(Actor,{
 In the example below, the Villain class implements VillainInterface. This interface requires the Villain to contain a `doEvil` method. It doesn't. 
 
 ```javascript
-var Villain = Ron.extend(Actor,{
+var Villain = DropletJS.Class.extend(Actor,{
 
     work : function(){
         console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
@@ -236,7 +236,7 @@ Uncaught Error: Interface not fully implemented: "doEvil" function is missing
 What if `doEvil` was defined, but it was defined as a boolean instead of a function?
 
 ```javascript
-var Villain = Ron.extend(Actor,{
+var Villain = DropletJS.Class.extend(Actor,{
 
     doEvil : false,
 
@@ -255,7 +255,7 @@ Uncaught Error: Interface improperly implemented. "doEvil" must be a function.
 
 ## Questions? Bugs? Suggestions?
 
-Please submit all bugs, questions, and suggestions via the [Issues](https://github.com/wmbenedetto/ron.js/issues) section so everyone can benefit from the answer.
+Please submit all bugs, questions, and suggestions via the [Issues](https://github.com/wmbenedetto/DropletJS.Class/issues) section so everyone can benefit from the answer.
 
 If you need to contact me directly, email warren@transfusionmedia.com.
 

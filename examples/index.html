@@ -2,15 +2,15 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Ron.js</title>
-    <script language="JavaScript" type="text/javascript" src="../src/Ron.js"></script>
+    <title>DropletJS.Class</title>
+    <script language="JavaScript" type="text/javascript" src="../src/DropletJS.Class.js"></script>
 
     <script type="text/javascript">
 
         /**
          * Create a new Person class
          */
-        var Person = Ron.create({
+        var Person = DropletJS.Class.create({
 
             /**
              * Class properties
@@ -44,7 +44,7 @@
         /**
          * Extend the Person class to create an Actor class
          */
-        var Actor = Ron.extend(Person,{
+        var Actor = DropletJS.Class.extend(Person,{
 
             /**
              * Subclass property. Class properties from Person
@@ -111,13 +111,13 @@
         actor.brag();
 
         var VillainInterface = {
-            doEvil  : Ron.FUNCTION
+            doEvil  : DropletJS.Class.FUNCTION
         };
 
         /**
          * Error: Interface not fully implemented: "doEvil" function is missing.
          */
-        var Villain = Ron.extend(Actor,{
+        var Villain = DropletJS.Class.extend(Actor,{
 
             work : function(){
                 console.log(this.firstName+' '+this.lastName+" says \"Why so serious?\"");
@@ -128,7 +128,7 @@
         /**
          * Error: Interface improperly implemented. "doEvil" must be a function.
          */
-        var Villain2 = Ron.extend(Actor,{
+        var Villain2 = DropletJS.Class.extend(Actor,{
 
             doEvil : false,
 
@@ -141,7 +141,7 @@
         /**
          * Interface properly implemented
          */
-        var Villain3 = Ron.extend(Actor,{
+        var Villain3 = DropletJS.Class.extend(Actor,{
 
             doEvil : function(){
                 console.log("See, I'm a man of simple tastes. I enjoy dynamite, and gunpowder, and... gasoline!");

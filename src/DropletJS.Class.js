@@ -1,17 +1,16 @@
-/** @license Ron.js | MIT License | https://github.com/wmbenedetto/ron.js#mit-license */
+/** @license DropletJS.Class | MIT License | https://github.com/wmbenedetto/DropletJS.Class#mit-license */
 if (typeof MINIFIED === 'undefined'){
     MINIFIED = false;
 }
 /**
- *     ____  ____  _   __     _______
- *    / __ \/ __ \/ | / /    / / ___/
- *   / /_/ / / / /  |/ /__  / /\__ \
- *  / _, _/ /_/ / /|  // /_/ /___/ /
- * /_/ |_|\____/_/ |_(_)____//____/
+ *     ____                   __     __      _______
+ *    / __ \_________  ____  / /__  / /_    / / ___/
+ *   / / / / ___/ __ \/ __ \/ / _ \/ __/_  / /\__ \
+ *  / /_/ / /  / /_/ / /_/ / /  __/ /_/ /_/ /___/ /
+ * /_____/_/   \____/ .___/_/\___/\__/\____//____/
+ *                 /_/
  *
- * "You stay classy, JavaScript."
- *
- * Ron.js : Simple Classical Inheritance for JavaScript
+ * DropletJS.Class : Simple Classical Inheritance for JavaScript
  *
  * Copyright (c) 2012 Warren Benedetto <warren@transfusionmedia.com>
  *
@@ -231,10 +230,11 @@ if (typeof MINIFIED === 'undefined'){
             return ClassFactory;
         });
     }
-    /* Otherwise, add ClassFactory to global namespace as Ron */
+    /* Otherwise, add ClassFactory to global namespace as DropletJS.Class */
     else {
 
-        window.Ron = ClassFactory;
+        window.DropletJS                        = (typeof window.DropletJS === 'object' && window.DropletJS !== 'null') ? window.DropletJS : {};
+        window.DropletJS.Class                  = ClassFactory;
     }
 
 }(window));
