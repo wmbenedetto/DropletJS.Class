@@ -8,12 +8,12 @@ DropletJS.Class is available via a number of popular package managers:
 
 ###JamJS
 ```
-jam install DropletJS.Sequencer
+jam install DropletJS.Class
 ```
 
 ###Bower
 ```
-bower install DropletJS.Sequencer
+bower install DropletJS.Class
 ```
 
 Or you can download the latest tag from https://github.com/wmbenedetto/DropletJS.Class/tags
