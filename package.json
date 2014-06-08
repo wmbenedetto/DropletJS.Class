@@ -1,6 +1,6 @@
 {
     "name"                      : "dropletjs.class",
-    "version"                   : "0.2.2",
+    "version"                   : "0.2.3",
     "description"               : "\"You stay classy, JavaScript.\" DropletJS.Class is a simple implementation of classical inheritance for JavaScript.",
     "keywords"                  : ["class", "classical","inheritance","extend","implement"],
     "categories"                : ["Utilities"],
