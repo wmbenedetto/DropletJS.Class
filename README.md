@@ -2,6 +2,22 @@
 
 DropletJS.Class is a simple implementation of classical inheritance for JavaScript. It allows you to extend classes and implement simple interfaces.
 
+## Quick install
+
+DropletJS.Class is available via a number of popular package managers:
+
+###JamJS
+```
+jam install DropletJS.Class
+```
+
+###Bower
+```
+bower install DropletJS.Class
+```
+
+Or you can download the latest tag from https://github.com/wmbenedetto/DropletJS.Class/tags
+
 ## Usage
 
 ### Creating a class
