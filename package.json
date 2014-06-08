@@ -34,14 +34,14 @@
     "dependencies"              : [],
     "homepage"                  : "https://github.com/wmbenedetto/DropletJS.Class",
     "github"                    : "https://github.com/wmbenedetto/DropletJS.Class",
-    "main"                      : "src/DropletJS.Class.js",
+    "main"                      : "src/DropletJS.Class.min.js",
 
     "jam" : {
 
-        "main"                  : "src/DropletJS.Class.js",
+        "main"                  : "src/DropletJS.Class.min.js",
 
         "include": [
-            "src/DropletJS.Class.js"
+            "src/DropletJS.Class.min.js"
         ]
     }
 }
